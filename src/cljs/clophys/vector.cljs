@@ -1,7 +1,7 @@
 (ns ^{:doc "Vector"
       :author "Zenna Tavares"}
   clophys.vector
-  (:require [clozen.helpers :refer [tolerant=]]))
+  (:require [clophys.helpers :refer [tolerant=]]))
 
 (defrecord VectorN
   [dims coords])
@@ -19,17 +19,19 @@
          (vector? coords)]}
   (->VectorN dims coords))
 
+(defn make-vector3
+  [x y z]
+  (make-vectorN 3 [x y z]))
+
 (defn unit-vectorn [n]
   (make-vectorN n (vec (repeat n 1.0))))
 
 (defn orig-vectorn [n]
   (make-vectorN n (vec (repeat n 0.0))))
 
-(defn orig-vector3 []
-  (orig-vectorn 3))
+(def orig-vector3 (orig-vectorn 3))
 
-(defn orig-vector2 []
-  (orig-vectorn 2))
+(def orig-vector2 (orig-vectorn 2))
 
 (defn std-uniform-vector [n]
   (make-vectorN n (vec (repeatedly n rand))))
@@ -123,7 +125,7 @@
         v3 (cross* v1-norm v2)
         v3-norm (normalise v3)]
     (if (tolerant= 0.0 (square-magnitude v3))
-        (throw (Exception. "v1 and v2 parallel"))
+        (throw (js/Error. "v1 and v2 parallel"))
         [v1-norm (cross* v3-norm v1-norm) v3-norm])))
 
 ;; Comment ===================================================================

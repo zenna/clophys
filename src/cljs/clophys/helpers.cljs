@@ -2,6 +2,8 @@
       :author "Zenna Tavares"}
   clophys.helpers)
 
+(defn sqr [x] (* x x))
+
 (defn tolerant=
   [x y]
   (< (* (- x y) (- x y)) 0.00001))

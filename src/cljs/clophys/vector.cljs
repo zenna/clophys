@@ -1,7 +1,7 @@
 (ns ^{:doc "Vector"
       :author "Zenna Tavares"}
   clophys.vector
-  (:require [clophys.helpers :refer [tolerant=]]))
+  (:require [clophys.helpers :refer [tolerant= sqr]]))
 
 (defrecord VectorN
   [dims coords])
@@ -110,6 +110,16 @@
   "Magnitude of a vector"
   [vectorn]
   (Math/sqrt (square-magnitude vectorn)))
+
+(defn sqr-dist
+  "Squared Euclidean distance - typcially for effiency"
+  [v1 v2]
+  (reduce + (map (comp sqr -)  (coords v1) (coords v2))))
+
+(defn dist
+  "Euclidean distance"
+  [v1 v2]
+  (Math/sqrt (sqr-dist v1 v2)))
 
 (defn normalise
   "Turns return unit vector"

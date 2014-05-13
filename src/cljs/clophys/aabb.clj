@@ -20,12 +20,12 @@
 ;; consistent naming for instersect functions
 ;; consistent for aabb vs rect
 
-
 (defrecord aabb
   [n-dims ^VectorN bounds])
 ;; Accessors ==================================================================
 (defn [x] (num-dims) (:n-dims x))
 (defn [x] (bounds) (:bounds x))
+
 ;; Intersections ==============================================================
 (defn intersect-circle-line?
   [circle line])
